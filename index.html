@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CGX30 — Sourav Mahato</title>
+  <meta name="description" content="CGX30 — the digital identity of Sourav Mahato. Dreaming Impossible. Building Possible.">
+  <meta name="theme-color" content="#050505">
+
+  <!-- Typography: Fraunces (editorial serif) + Inter (grotesque body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..700;1,9..144,100..700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Living background layers: grain, ambient light, drifting dust -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+
+  <!-- Custom cursor (fine pointers only) -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-head">
+    <a class="wordmark magnetic" href="#top">CGX30</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#vision">Vision</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ LANDING ============ -->
+    <section class="hero">
+      <p class="hero-eyebrow" data-reveal>Sourav Mahato&nbsp;&nbsp;·&nbsp;&nbsp;India&nbsp;&nbsp;·&nbsp;&nbsp;Fifteen</p>
+      <h1 class="hero-title" data-reveal data-delay="1">CGX30</h1>
+      <p class="hero-tagline" data-reveal data-delay="2">Dreaming Impossible.<br><em>Building Possible.</em></p>
+      <p class="hero-role" data-reveal data-delay="3"><span id="role">Student</span></p>
+      <a href="#about" class="btn magnetic" data-reveal data-delay="4"><span>Explore</span></a>
+      <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section about">
+      <p class="sec-label" data-reveal>01 — About</p>
+      <h2 class="sec-title" data-reveal data-delay="1">A fifteen-year-old with an<br><em>unreasonable</em> imagination.</h2>
+
+      <div class="about-grid">
+        <article class="card card-a" data-reveal>
+          <span class="card-index">i</span>
+          <h3>Who I am</h3>
+          <p>Sourav Mahato. A student from India who treats every idea as a question worth answering — and every answer as the start of a better question.</p>
+        </article>
+        <article class="card card-b" data-reveal data-delay="1">
+          <span class="card-index">ii</span>
+          <h3>What I create</h3>
+          <p>Games, apps, and experiments. Small things, built carefully — because the size of a project matters less than the intent behind it.</p>
+        </article>
+        <article class="card card-c" data-reveal data-delay="2">
+          <span class="card-index">iii</span>
+          <h3>Curiosity</h3>
+          <p>I take software apart to see how it thinks. Reading, exploring, and learning fast are not hobbies here — they are the operating system.</p>
+        </article>
+        <article class="card card-d" data-reveal data-delay="3">
+          <span class="card-index">iv</span>
+          <h3>Ambition</h3>
+          <p>Developer. Game creator. AI engineer. The titles will come later — the work has already started. This journey has only begun.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section id="work" class="section work">
+      <p class="sec-label" data-reveal>02 — Selected Work</p>
+      <h2 class="sec-title" data-reveal data-delay="1">Made with patience.<br><em>Shipped with pride.</em></h2>
+
+      <div class="cases">
+        <article class="case" data-reveal>
+          <div class="case-visual v-shifter" aria-hidden="true"><span class="v-mark">CC:S</span></div>
+          <div class="case-body">
+            <span class="case-no">001</span>
+            <h3>Cat Colony: Shifter</h3>
+            <p>A game built from scratch — design, logic, and world. The first proof that an idea can survive contact with reality.</p>
+            <span class="case-tag">Game</span>
+          </div>
+        </article>
+
+        <article class="case case-alt" data-reveal>
+          <div class="case-visual v-keyboard" aria-hidden="true"><span class="v-mark">⌨</span></div>
+          <div class="case-body">
+            <span class="case-no">002</span>
+            <h3>Android Keyboard &amp; Trackpad</h3>
+            <p>A utility that turns a phone into an input device. Practical, quiet software that simply works.</p>
+            <span class="case-tag">App</span>
+          </div>
+        </article>
+
+        <article class="case" data-reveal>
+          <div class="case-visual v-lab" aria-hidden="true"><span class="v-mark">∿</span></div>
+          <div class="case-body">
+            <span class="case-no">003</span>
+            <h3>Personal Experiments</h3>
+            <p>Prototypes, sketches, and half-wild ideas. The workshop where mistakes are made on purpose.</p>
+            <span class="case-tag">Ongoing</span>
+          </div>
+        </article>
+
+        <article class="case case-alt" data-reveal>
+          <div class="case-visual v-ai" aria-hidden="true"><span class="v-mark">AI</span></div>
+          <div class="case-body">
+            <span class="case-no">004</span>
+            <h3>Future AI Projects</h3>
+            <p>Currently a blueprint. Intelligence, built by hand — the most ambitious line on this page.</p>
+            <span class="case-tag">In design</span>
+          </div>
+        </article>
+      </div>
+
+      <p class="work-more" data-reveal>More coming soon — <em>this page is a living document.</em></p>
+    </section>
+
+    <!-- ============ VISION ============ -->
+    <section id="vision" class="section vision">
+      <p class="sec-label" data-reveal>03 — Vision</p>
+      <ul class="vision-words">
+        <li data-reveal>Learning<span>— everything, endlessly</span></li>
+        <li data-reveal data-delay="1">Creating<span>— things that didn't exist yesterday</span></li>
+        <li data-reveal data-delay="2">Building<span>— carefully, one layer at a time</span></li>
+        <li data-reveal data-delay="3">Growing<span>— faster than expected</span></li>
+        <li data-reveal data-delay="4">Inspiring<span>— eventually, someone like me</span></li>
+      </ul>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section contact">
+      <p class="sec-label" data-reveal>04 — Contact</p>
+      <h2 class="sec-title" data-reveal data-delay="1">One place.<br><em>Everything else is noise.</em></h2>
+
+      <a class="channel magnetic" href="https://youtube.com/@cgx30" target="_blank" rel="noopener" data-reveal data-delay="2">
+        <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+          <path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z"/>
+        </svg>
+        <span class="channel-text"><strong>Official Channel</strong><em>youtube.com/@cgx30</em></span>
+        <span class="channel-arrow" aria-hidden="true">→</span>
+      </a>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-foot">
+    <p class="foot-mark">CGX30</p>
+    <p class="foot-line">Designed &amp; Developed by Sourav Mahato</p>
+    <p class="foot-copy">© 2026 All Rights Reserved</p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
