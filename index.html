@@ -109,6 +109,8 @@ body {
   transition: background 0.8s var(--ease), color 0.8s var(--ease);
   /* no copying text */
   user-select: none; -webkit-user-select: none;
+  -webkit-touch-callout: none;   /* iOS: no long-press callout */
+  touch-action: manipulation;    /* no double-tap zoom delay */
 }
 img { -webkit-user-drag: none; }
 
