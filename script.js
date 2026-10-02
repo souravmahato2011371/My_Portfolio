@@ -15,11 +15,6 @@ if(matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:
     el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.12,y=(e.clientY-r.top-r.height/2)*.12;el.style.transform="translate("+x+"px,"+y+"px)"});
     el.addEventListener("pointerleave",()=>el.style.transform="");
   });
-  /* Cards stay flat: less pointer work, smoother scrolling. */
-  document.querySelectorAll(".magnetic-card").forEach(el=>{
-    el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform="perspective(1100px) rotateX("+(-y*2.2)+"deg) rotateY("+(x*2.2)+"deg) translateY(-3px)"});
-    el.addEventListener("pointerleave",()=>el.style.transform="");
-  });
 }
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");observer.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
