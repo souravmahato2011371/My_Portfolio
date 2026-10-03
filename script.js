@@ -1,28 +1,14 @@
-(() => {
-"use strict";
-const root=document.documentElement, progress=document.querySelector(".progress i");
-let ticking=false;
-function scrollFX(){
-  const max=document.documentElement.scrollHeight-innerHeight;
-  progress.style.transform="scaleX("+Math.max(0,Math.min(1,scrollY/max))+")";
-  ticking=false;
-}
-addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(scrollFX);ticking=true}},{passive:true});scrollFX();
-
-if(matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches){
-  addEventListener("pointermove",e=>{root.style.setProperty("--mx",e.clientX+"px");root.style.setProperty("--my",e.clientY+"px")},{passive:true});
-  document.querySelectorAll(".magnetic").forEach(el=>{
-    el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.12,y=(e.clientY-r.top-r.height/2)*.12;el.style.transform="translate("+x+"px,"+y+"px)"});
-    el.addEventListener("pointerleave",()=>el.style.transform="");
-  });
-}
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");observer.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-
-const theme=document.getElementById("theme");
-const saved=localStorage.getItem("cgx-theme");
-if(saved==="light")document.documentElement.classList.add("light");
-theme.addEventListener("click",()=>{document.documentElement.classList.toggle("light");localStorage.setItem("cgx-theme",document.documentElement.classList.contains("light")?"light":"dark")});
-
+(()=>{"use strict";
+const doc=document.documentElement;
+const bar=document.querySelector(".scroll-line span");
+const glow=document.querySelector(".cursor-glow");
+let scrollQueued=false;
+function updateScroll(){const max=doc.scrollHeight-innerHeight;bar.style.transform="scaleX("+Math.max(0,Math.min(1,scrollY/max))+")";scrollQueued=false}
+addEventListener("scroll",()=>{if(!scrollQueued){requestAnimationFrame(updateScroll);scrollQueued=true}},{passive:true});updateScroll();
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(!reduced&&matchMedia("(pointer:fine)").matches){addEventListener("pointermove",e=>{glow.style.setProperty("--x",e.clientX+"px");glow.style.setProperty("--y",e.clientY+"px")},{passive:true});
+document.querySelectorAll(".button").forEach(el=>{el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.transform="translate("+((e.clientX-r.left-r.width/2)*.08)+"px,"+((e.clientY-r.top-r.height/2)*.08)+"px)"});el.addEventListener("pointerleave",()=>el.style.transform="")})}
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",()=>{const id=a.getAttribute("href");if(id&&id!=="#top")history.replaceState(null,"",id)}));
 })();
