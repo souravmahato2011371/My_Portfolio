@@ -1,16 +1,103 @@
 (()=>{"use strict";
+
+/*
+  =========================
+  ADD YOUR RESOURCES HERE
+  =========================
+
+  You only need to fill the fields you want.
+
+  VIDEO ONLY:
+    video: "https://youtu.be/VIDEO_ID"
+
+  VIDEO + PROMPT:
+    video: "...",
+    prompt: `your prompt here`
+
+  VIDEO + CODE:
+    video: "...",
+    code: { language: "javascript", filename: "script.js", content: `your code here` }
+
+  You can also use:
+    commands: [{name:"Install",content:"npm install"}]
+    links: [{label:"GitHub",url:"https://github.com/..."}]
+
+  Leave anything you don't need out. Empty sections are automatically hidden.
+*/
+
 const resources=[
-{number:"01",title:"Website from a survey",description:"The prompt used to design and deploy a website from survey results.",video:"",prompt:'In hinglish, survey me and make a suitable website that suits the results of the survey. Deploy it on my github repo "{NAME_OF_REPO}". Directly deploy in the main branch, make the site so responsive and smooth without compromising. Don’t limit yourself in just index.html, make the files that stable hosting on github pages need.'},
-{number:"02",title:"Your next resource",description:"Add a video and a piece of code whenever this resource is ready.",video:"",code:{language:"javascript",filename:"example.js",content:'// Paste the exact code from your video here.\nconsole.log("Hello, CGX30");'}}
+  {
+    number:"01",
+    title:"Website from a survey",
+    description:"The prompt used in the video.",
+    video:"", // Paste the YouTube link here when the video is published.
+    prompt:`In hinglish, survey me and make a suitable website that suits the results of the survey. Deploy it on my github repo "{NAME_OF_REPO}". Directly deploy in the main branch, make the site so responsive and smooth without compromising. Don't limit yourself in just index.html, make the files that stable hosting on github pages need.`
+  },
+
+  {
+    number:"02",
+    title:"Your next resource",
+    description:"Example: a video with a piece of code.",
+    video:"",
+    code:{
+      language:"javascript",
+      filename:"example.js",
+      content:`// Paste the exact code from your video here.
+console.log("Hello, CGX30");`
+    }
+  }
+
+  // Add resource 03, 04, 05... below.
 ];
+
 const list=document.querySelector("#resource-list");
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const id=u=>{const m=String(u||"").match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/);return m?m[1]:""};
-const video=u=>{const i=id(u);return i?'<div class="video-shell"><iframe src="https://www.youtube-nocookie.com/embed/'+i+'" title="Video resource" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>':'<div class="video-placeholder"><span>VIDEO</span><strong>Coming soon.</strong><small>Add the YouTube link in resources.js</small></div>'};
-const code=(x,key)=>'<div class="code-card"><div class="code-head"><span>'+esc(x.filename||"code.txt")+' · '+esc(x.language||"text")+'</span><button type="button" data-copy="'+key+'">COPY</button></div><pre id="'+key+'">'+esc(x.content||"")+'</pre></div>';
-const block=(n,label,content)=>'<section class="resource-block"><aside>'+n+' / '+label+'</aside><div>'+content+'</div></section>';
-function render(){list.innerHTML=resources.map((r,i)=>{let n=1,s='<article class="resource-entry reveal"><header><span>RESOURCE '+esc(r.number||String(i+1).padStart(2,"0"))+'</span><h2>'+esc(r.title||"Untitled")+'</h2><p>'+esc(r.description||"")+'</p></header>';if(r.video)s+=block(String(n++).padStart(2,"0"),"VIDEO",video(r.video));if(r.prompt)s+=block(String(n++).padStart(2,"0"),"PROMPT",code({filename:"prompt.txt",language:"text",content:r.prompt},"prompt-"+i));if(r.code)s+=block(String(n++).padStart(2,"0"),"CODE",code(r.code,"code-"+i));if(r.commands?.length)s+=block(String(n++).padStart(2,"0"),"COMMANDS",'<div class="command-list">'+r.commands.map((x,j)=>'<div class="command"><div><small>'+esc(x.name||"COMMAND")+'</small><pre id="cmd-'+i+"-"+j+'">'+esc(x.content||"")+'</pre></div><button type="button" data-copy="cmd-'+i+"-"+j+'">COPY</button></div>').join("")+"</div>");if(r.links?.length)s+=block(String(n++).padStart(2,"0"),"LINKS",'<div class="link-list">'+r.links.map(x=>'<a href="'+esc(x.url||"#")+'" target="_blank" rel="noopener noreferrer"><span>'+esc(x.label||x.url||"LINK")+'</span><b>↗</b></a>').join("")+"</div>");return s+"</article>"}).join("");document.querySelectorAll(".resource-entry").forEach(x=>x.classList.add("is-visible"))}
-document.addEventListener("click",async e=>{const b=e.target.closest("[data-copy]");if(!b)return;const el=document.getElementById(b.dataset.copy);try{await navigator.clipboard.writeText(el.textContent);const old=b.textContent;b.textContent="COPIED";setTimeout(()=>b.textContent=old,1400)}catch{b.textContent="SELECT & COPY";setTimeout(()=>b.textContent="COPY",1400)}});
-render();
-const bar=document.querySelector(".progress span");addEventListener("scroll",()=>requestAnimationFrame(()=>{const max=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(max?scrollY/max:0)+")"}),{passive:true});
+const bar=document.querySelector(".scroll-line span");
+
+function escapeHTML(value=""){
+  return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+function youtubeId(url=""){
+  const match=String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([A-Za-z0-9_-]{6,})/);
+  return match?match[1]:"";
+}
+function videoBlock(url){
+  const id=youtubeId(url);
+  if(!id) return `<div class="video-shell"><div class="video-placeholder"><span>VIDEO</span><strong>Video link<br>coming soon.</strong><small>Add the YouTube link in resources.js</small></div></div>`;
+  return `<div class="video-shell"><iframe src="https://www.youtube-nocookie.com/embed/${id}" title="Video resource" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+}
+function section(number,label,content){
+  return `<section class="resource-section"><div class="resource-label">${number} / ${label}</div><div class="resource-main">${content}</div></section>`;
+}
+function codeBlock(code,index){
+  const id=`code-${index}`;
+  return `<div class="code-card"><div class="code-head"><span>${escapeHTML(code.filename||"code.txt")} · ${escapeHTML(code.language||"text")}</span><button data-copy="${id}">COPY</button></div><pre id="${id}">${escapeHTML(code.content||"")}</pre></div>`;
+}
+function commandsBlock(commands,index){
+  return `<div class="command-list">${commands.map((x,i)=>`<div class="command-item"><div><small>${escapeHTML(x.name||"COMMAND")}</small><pre id="cmd-${index}-${i}">${escapeHTML(x.content||"")}</pre></div><button data-copy="cmd-${index}-${i}">COPY</button></div>`).join("")}</div>`;
+}
+function linksBlock(links){
+  return `<div class="link-grid">${links.map(x=>`<a href="${escapeHTML(x.url||"#")}" target="_blank" rel="noopener noreferrer"><span>${escapeHTML(x.label||x.url||"LINK")}</span><b>↗</b></a>`).join("")}</div>`;
+}
+function render(){
+  if(!resources.length){list.innerHTML='<div class="empty-resource">No resources added yet.</div>';return}
+  list.innerHTML=resources.map((r,i)=>{
+    const n=String(r.number||String(i+1).padStart(2,"0"));
+    let out=`<article class="resource-entry" id="resource-${n}"><div class="resource-entry-head"><span>RESOURCE ${n}</span><h2>${escapeHTML(r.title||"Untitled resource")}</h2><p>${escapeHTML(r.description||"")}</p></div>`;
+    let part=1;
+    if(r.video) out+=section(String(part++).padStart(2,"0"),"VIDEO",videoBlock(r.video));
+    if(r.prompt) out+=section(String(part++).padStart(2,"0"),"PROMPT",`<div class="resource-heading">Prompt used<br><em>in the video.</em></div><p class="resource-note">The exact text used for this resource.</p>${codeBlock({filename:"prompt.txt",language:"text",content:r.prompt},`prompt-${i}`) }`);
+    if(r.code) out+=section(String(part++).padStart(2,"0"),"CODE",`<div class="resource-heading">Code &<br><em>snippets.</em></div><p class="resource-note">Copy the code directly from here.</p>${codeBlock(r.code,`main-${i}`) }`);
+    if(r.commands?.length) out+=section(String(part++).padStart(2,"0"),"COMMANDS",`<div class="resource-heading">Useful<br><em>commands.</em></div>${commandsBlock(r.commands,i)}`);
+    if(r.links?.length) out+=section(String(part++).padStart(2,"0"),"LINKS",`<div class="resource-heading">Useful<br><em>links.</em></div>${linksBlock(r.links)}`);
+    return out+"</article>";
+  }).join("");
+}
+function updateScroll(){const max=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+Math.max(0,Math.min(1,scrollY/max))+")"}
+document.addEventListener("click",async e=>{
+ const button=e.target.closest("[data-copy]");if(!button)return;
+ const el=document.getElementById(button.dataset.copy);if(!el)return;
+ try{await navigator.clipboard.writeText(el.textContent);const old=button.textContent;button.textContent="COPIED";setTimeout(()=>button.textContent=old,1400)}
+ catch{button.textContent="SELECT & COPY";setTimeout(()=>button.textContent="COPY",1400)}
+});
+render();addEventListener("scroll",updateScroll,{passive:true});updateScroll();
 })();
