@@ -132,9 +132,9 @@ footer{border-top:2px solid var(--text);color:var(--muted)}
    60% Swiss grid and typography · 20% brutalist structure ·
    remaining 20% split evenly across tactile, maximalist, and Y2K accents. */
 :root{
-  --bg:#f3f1e9;--panel:#faf9f4;--panel2:#e4e0d5;--text:#171918;
-  --muted:#555953;--faint:#767970;--line:#202320;
-  --lime:#e63b2e;--blue:#2349d8;--pink:#c7f0ee;
+  --bg:#f4efdf;--panel:#fffaf0;--panel2:#ffbd2e;--text:#171717;
+  --muted:#403d37;--faint:#625d52;--line:#171717;
+  --lime:#f0442e;--blue:#234be7;--pink:#ffbd2e;
   --display:"Space Grotesk",sans-serif;--body:"Manrope",sans-serif;--mono:"DM Mono",monospace;
 }
 body{background:var(--bg);color:var(--text)}
@@ -226,14 +226,14 @@ footer{border-top:1px solid var(--text);color:var(--muted);font-size:9px;letter-
 .cat-art .project-word{transform:rotate(-3deg)}
 .lab-art .project-word{transform:rotate(2deg)}
 .ai-art .project-word{transform:rotate(-2deg)}
-/* Y2K: tiny technical labels and cool mint accent, never the dominant palette. */
+/* Y2K: tiny technical labels and bright signal-yellow accents, never the dominant palette. */
 .art-note:after{content:" / 2000+";color:var(--blue)}
 .word-c{border-color:var(--blue);box-shadow:2px 2px 0 var(--blue)}
 .resource-hero,.resource-section,.resource-entry{border-color:var(--text)}
 .resource-label,.resource-note{color:var(--muted)}
 .resource-heading em{color:var(--lime)}
 .video-shell{border:1px solid var(--text);box-shadow:4px 4px 0 var(--text);background:var(--panel)}
-.video-placeholder{background:linear-gradient(135deg,#f3f1e9 0 48%,#2349d8 48% 72%,#e63b2e 72%);border:1px solid var(--text)}
+.video-placeholder{background:linear-gradient(135deg,#f4efdf 0 42%,#ffbd2e 42% 54%,#234be7 54% 76%,#f0442e 76%);border:1px solid var(--text)}
 .video-placeholder span,.video-placeholder small{color:var(--text);background:var(--bg);padding:5px 7px}
 .video-placeholder strong{color:var(--text);text-shadow:2px 2px 0 #faf9f4}
 .code-card{border:1px solid var(--text);background:#171918;box-shadow:4px 4px 0 var(--text)}
